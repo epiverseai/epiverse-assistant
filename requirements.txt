@@ -1,5 +1,7 @@
-streamlit
 deep-translator
-# transformers
-# torch
-# re
+streamlit==1.33.0
+bitsandbytes==0.43.1
+accelerate==0.29.2
+# transformers==4.38.2 # Quitar comentario si se usa en disco local
+# torch==2.2.1+cu121 # Quitar comentario si se usa en disco local
+# regex==2023.12.25 # Quitar comentario si se usa en disco local
