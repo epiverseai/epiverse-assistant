@@ -1,18 +1,20 @@
 import streamlit as st
 import inspect
 import transformers
-from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 import re
+import warnings
+import sys
+import os
 
-# Crear las pestañas
-# tab1, tab2 = st.tabs(["Ayudante de R", "Ayudante de Sivirep"])
+warnings.filterwarnings("ignore")
 
 global pregunta
 global response
 
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
+@st.cache_resource()
 def get_model():
     BASE_MODEL_ID = "NousResearch/Llama-2-7b-chat-hf"
 
@@ -64,14 +66,19 @@ def only_answer(response: str):
         return response
 
 
+st.set_page_config(
+    page_title="R",
+    page_icon="🤗",
+)
+
 tokenizer, model = get_model()
 
-st.title("Epiverse Chatbot - Sivirep")
+st.title("R Chatbot - Assistant")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "How may I assist you today?"}
+        {"role": "assistant", "content": "¿Cómo puedo ayudarte con R?"}
     ]
 
 # Display or clear chat messages
@@ -79,7 +86,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("¿Qué quieres aprender de Sivirep?"):
+if prompt := st.chat_input("¿Qué quieres aprender de R?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
