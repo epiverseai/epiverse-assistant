@@ -91,6 +91,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
             response = evaluate_model(question)
+            print(response)
             response = only_answer(response)
             response = dependencies.translate.translate_en_es(response)
             placeholder = st.empty()
