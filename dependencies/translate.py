@@ -84,6 +84,27 @@ if __name__ == "__main__":
     """
     )
 
+    text4 = inspect.cleandoc(
+        """
+        Sure, I'd be happy to help you with that! Here is a basic implementation of the bubble sort algorithm in Python:
+        everybody loves bubble sort! 😊
+
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n-1):
+                for j in range(0, n-i-1):
+                    if arr[j] > arr[j+1]:
+                        # swap the two elements
+                        arr[j], arr[j+1] = arr[j+1], arr[j]
+            return arr
+
+        Here's how the algorithm works:
+
+        1. We loop through the array `arr` from the last index to the first index.
+        2. Within each loop, we loop through the array from the first index to the last index, minus the current index (i).
+    """
+    )
+
     res1 = translate_en_es(text1)
     print(res1)
     print("\n\n===============")
@@ -94,4 +115,8 @@ if __name__ == "__main__":
 
     res3 = translate_en_es(text3)
     print(res3)
+    print("\n\n===============")
+
+    res4 = translate_en_es(text4)
+    print(res4)
     print("\n\n===============")
