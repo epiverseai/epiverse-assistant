@@ -6,10 +6,11 @@ import re
 import warnings
 import sys
 import os
+import dependencies.translate
 
 warnings.filterwarnings("ignore")
 
-global pregunta
+global question
 global response
 
 
@@ -42,12 +43,8 @@ def get_model():
 
 @torch.no_grad()
 def evaluate_model(prompt: str):
-    eval_prompt = inspect.cleandoc(
-        f"""[INST] <<<SYS>>> You are an expert in any topic, please response the following  <<<SYS>>> {prompt} [/INST] Response:"""
-    )
-    model_input = tokenizer.encode(
-        eval_prompt, return_tensors="pt", add_special_tokens=False
-    ).to("cuda")
+    eval_prompt = inspect.cleandoc(f"""[INST] <<<SYS>>> You are an expert in any topic, please response the following  <<<SYS>>> {prompt} [/INST] Response:""")
+    model_input = tokenizer.encode(eval_prompt, return_tensors="pt", add_special_tokens=False).to("cuda")
     model_output = model.generate(
         input_ids=model_input,
         max_new_tokens=200,
@@ -77,9 +74,7 @@ st.title("R Chatbot - Assistant")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {"role": "assistant", "content": "¿Cómo puedo ayudarte con R?"}
-    ]
+    st.session_state.messages = [{"role": "assistant", "content": "¿Cómo puedo ayudarte con R?"}]
 
 # Display or clear chat messages
 for message in st.session_state.messages:
@@ -90,15 +85,16 @@ if prompt := st.chat_input("¿Qué quieres aprender de R?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-        pregunta = prompt
+        question = prompt
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = evaluate_model(pregunta)
-            print(response)
+            question = dependencies.translate.translate_es_en(question)
+            response = evaluate_model(question)
             response = only_answer(response)
+            response = dependencies.translate.translate_en_es(response)
             placeholder = st.empty()
             full_response = ""
             for item in response:
