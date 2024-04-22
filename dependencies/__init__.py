@@ -1,4 +1,4 @@
-import get_answer
-import translate
-import get_model
-import evaluate_model
+import dependencies.get_answer
+import dependencies.translate
+import dependencies.get_model
+import dependencies.evaluate_model
