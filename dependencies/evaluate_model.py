@@ -1,5 +1,6 @@
 import torch
 import inspect
+import transformers
 
 
 class EosListStoppingCriteria(transformers.StoppingCriteria):
