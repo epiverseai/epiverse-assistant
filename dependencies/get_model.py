@@ -2,6 +2,8 @@ import streamlit as st
 import transformers
 import torch
 import peft
+import huggingface_hub
+import os
 
 
 # @st.cache(allow_output_mutation=True)
@@ -18,6 +20,8 @@ def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.float16,
     )
+
+    huggingface_hub.login(token=os.environ.get("HFT"))
 
     model_base = transformers.AutoModelForCausalLM.from_pretrained(
         BASE_MODEL_ID,

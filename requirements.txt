@@ -6,3 +6,4 @@ peft==0.10.0
 # transformers==4.38.2 # Quitar comentario si se usa en disco local
 # torch==2.2.1+cu121 # Quitar comentario si se usa en disco local
 # regex==2023.12.25 # Quitar comentario si se usa en disco local
+# huggingface_hub==0.20.3 # Quitar comentario si se usa en disco local
