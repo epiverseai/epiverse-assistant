@@ -6,9 +6,9 @@ import peft
 
 # @st.cache(allow_output_mutation=True)
 @st.cache_resource()
-def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, OUTPUT_MODEL_DIR: str):
+def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR: str):
 
-    tokenizer_production = transformers.AutoTokenizer.from_pretrained(OUTPUT_MODEL_DIR)
+    tokenizer_production = transformers.AutoTokenizer.from_pretrained(MODEL_SIVIREP_DIR)
     tokenizer_production.pad_token = tokenizer_production.eos_token
     tokenizer_production.padding_side = "right"
 
@@ -36,7 +36,7 @@ def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, OUTPUT_MODEL_DIR:
 
     # Uniendo con Sivirep
     model_production = peft.PeftModel.from_pretrained(
-        model_r_datascience, f"{OUTPUT_MODEL_DIR}"
+        model_r_datascience, f"{MODEL_SIVIREP_DIR}"
     )
     model_production.eval()
 

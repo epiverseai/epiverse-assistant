@@ -1,6 +1,7 @@
 import streamlit as st
 import warnings
 import dependencies
+import constants
 
 warnings.filterwarnings("ignore")
 
@@ -13,8 +14,11 @@ st.set_page_config(
     page_icon="👋",
 )
 
-BASE_MODEL_ID = "NousResearch/Llama-2-7b-chat-hf"
-tokenizer, model = dependencies.get_model.get_model()
+tokenizer, model = dependencies.get_model.get_model(
+    constants.BASE_MODEL_ID,
+    constants.MODEL_DATA_SCIENCE_DIR,
+    constants.MODEL_SIVIREP_DIR,
+)
 
 st.title("Epiverse Chatbot - Sivirep")
 
