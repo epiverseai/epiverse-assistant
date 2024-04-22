@@ -30,7 +30,7 @@ st.title("Epiverse Chatbot - Sivirep 👋")
 # Store LLM generated responses
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "¿Cómo puedo ayudarte con Epiverse - Sivirep?"}
+        {"role": "assistant", "content": "¿Cómo puedo ayudarte?"}
     ]
 
 # Display or clear chat messages
@@ -52,7 +52,6 @@ if st.session_state.messages[-1]["role"] != "assistant":
             response = dependencies.evaluate_model.evaluate_model_single(
                 question, "Epiverse", tokenizer_production, model_production
             )
-            print(response)
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)
             placeholder = st.empty()
