@@ -15,8 +15,8 @@ global response
 
 
 st.set_page_config(
-    page_title="Epiverse",
-    page_icon="👋",
+    page_title="Epiverse Assistant",
+    page_icon="🤖",
 )
 
 tokenizer_production, model_production = dependencies.get_model.get_model(
@@ -25,7 +25,7 @@ tokenizer_production, model_production = dependencies.get_model.get_model(
     constants.MODEL_SIVIREP_DIR,
 )
 
-st.title("Epiverse Chatbot - Sivirep")
+st.title("Epiverse Chatbot - Sivirep 👋")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
