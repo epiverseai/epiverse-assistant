@@ -1,7 +1,12 @@
+import dotenv
+
+dotenv.load_dotenv()
+
 import streamlit as st
 import warnings
 import dependencies
 import constants
+
 
 warnings.filterwarnings("ignore")
 
@@ -14,7 +19,7 @@ st.set_page_config(
     page_icon="👋",
 )
 
-tokenizer, model = dependencies.get_model.get_model(
+tokenizer_production, model_production = dependencies.get_model.get_model(
     constants.BASE_MODEL_ID,
     constants.MODEL_DATA_SCIENCE_DIR,
     constants.MODEL_SIVIREP_DIR,
@@ -45,7 +50,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_single(
-                question, "Epiverse", tokenizer, model
+                question, "Epiverse", tokenizer_production, model_production
             )
             print(response)
             response = dependencies.get_answer.get_answer(response)

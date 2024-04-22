@@ -19,9 +19,9 @@ global response
 def get_model():
     BASE_MODEL_ID = "NousResearch/Llama-2-7b-chat-hf"
 
-    tokenizer = transformers.AutoTokenizer.from_pretrained(BASE_MODEL_ID)
-    tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = "right"
+    tokenizer_production = transformers.AutoTokenizer.from_pretrained(BASE_MODEL_ID)
+    tokenizer_production.pad_token = tokenizer_production.eos_token
+    tokenizer_production.padding_side = "right"
 
     quantization_config = transformers.BitsAndBytesConfig(
         load_in_4bit=True,
@@ -30,15 +30,15 @@ def get_model():
         bnb_4bit_compute_dtype=torch.float16,
     )
 
-    model = transformers.AutoModelForCausalLM.from_pretrained(
+    model_production = transformers.AutoModelForCausalLM.from_pretrained(
         BASE_MODEL_ID,
         quantization_config=quantization_config,
         device_map="auto",
     )
 
-    model.config.use_cache = False
-    model.config.pretraining_tp = 1
-    return tokenizer, model
+    model_production.config.use_cache = False
+    model_production.config.pretraining_tp = 1
+    return tokenizer_production, model_production
 
 
 @torch.no_grad()
@@ -46,16 +46,16 @@ def evaluate_model(prompt: str):
     eval_prompt = inspect.cleandoc(
         f"""[INST] <<<SYS>>> You are an expert in any topic, please response the following  <<<SYS>>> {prompt} [/INST] Response:"""
     )
-    model_input = tokenizer.encode(
+    model_input = tokenizer_production.encode(
         eval_prompt, return_tensors="pt", add_special_tokens=False
     ).to("cuda")
-    model_output = model.generate(
+    model_output = model_production.generate(
         input_ids=model_input,
         max_new_tokens=200,
-        pad_token_id=tokenizer.eos_token_id,
-        eos_token_id=tokenizer.eos_token_id,
+        pad_token_id=tokenizer_production.eos_token_id,
+        eos_token_id=tokenizer_production.eos_token_id,
     )
-    return tokenizer.decode(model_output[0], skip_special_tokens=False)
+    return tokenizer_production.decode(model_output[0], skip_special_tokens=False)
 
 
 def only_answer(response: str):
@@ -72,7 +72,7 @@ st.set_page_config(
     page_icon="🤗",
 )
 
-# tokenizer, model = get_model()
+# tokenizer_production, model_production = get_model()
 
 # st.title("R Chatbot - Assistant")
 

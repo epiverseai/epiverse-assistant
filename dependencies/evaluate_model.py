@@ -4,8 +4,10 @@ import transformers
 
 
 class EosListStoppingCriteria(transformers.StoppingCriteria):
-    def __init__(self, tokenizer, stop_token: str):
-        self.eos_sequence = tokenizer.encode(stop_token, add_special_tokens=False)
+    def __init__(self, tokenizer_production, stop_token: str):
+        self.eos_sequence = tokenizer_production.encode(
+            stop_token, add_special_tokens=False
+        )
 
     def __call__(
         self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs
