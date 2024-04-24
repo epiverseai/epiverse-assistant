@@ -10,9 +10,11 @@ import os
 @st.cache_resource()
 def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR: str):
 
+    huggingface_hub.login(token=os.environ.get("HFT"))
+
     # Tokenizer base
     tokenizer_base = transformers.AutoTokenizer.from_pretrained(BASE_MODEL_ID)
-    tokenizer_base.pad_token = tokenizer_production.eos_token
+    tokenizer_base.pad_token = tokenizer_base.eos_token
     tokenizer_base.padding_side = "right"
 
     # Tokenizer produccion
@@ -26,8 +28,6 @@ def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.float16,
     )
-
-    huggingface_hub.login(token=os.environ.get("HFT"))
 
     # Model base
     model_base = transformers.AutoModelForCausalLM.from_pretrained(

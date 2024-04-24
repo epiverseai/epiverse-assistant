@@ -62,9 +62,13 @@ def evaluate_model_beam(
         eval_prompt = inspect.cleandoc(
             f"""[INST] You are an expert assistant in {category}. Provide accurate, clear R code and explanations for technical queries. Keep responses concise, structured, and relevant, with a focus on precision. {instruction} [/INST] Response: [RES] """
         )
-    else:
+    elif category == "Epiverse":
         eval_prompt = inspect.cleandoc(
             f"""[INST] You are an expert assistant in R for {category}, a library for epidemiological data analysis. Provide accurate, clear R code and explanations for technical queries. Keep responses concise, structured, and relevant, with a focus on precision. {instruction} [/INST] Response: [RES] """
+        )
+    else:
+        eval_prompt = inspect.cleandoc(
+            f"""[INST] Respond informatively and accurately to any question posed. This includes answering simple questions about mood, providing detailed explanations of technical or academic concepts, and offering step-by-step guides when necessary. Make sure to adjust the tone and level of detail of your response according to the complexity of the question and the context provided. If the question is ambiguous or lacks information, kindly request more details to provide a more precise answer. Your goal is to be helpful, educational, and clear in all your responses. [/INST] Response: """
         )
 
     stopping_criteria = [EosListStoppingCriteria(production_tokenizer, "[/RES]")]

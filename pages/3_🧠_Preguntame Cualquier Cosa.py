@@ -15,8 +15,8 @@ global response
 
 
 st.set_page_config(
-    page_title="R Assistant",
-    page_icon="🤗",
+    page_title="Ask me anything",
+    page_icon="🌎",
 )
 
 tokenizer_production, model_production, tokenizer_base, model_base = (
@@ -27,7 +27,7 @@ tokenizer_production, model_production, tokenizer_base, model_base = (
     )
 )
 
-st.title("R Chatbot - Assistant 👋")
+st.title("Pregúntame lo que quieras - Assistant 👋")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
@@ -40,7 +40,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("¿Qué quieres aprender de R?"):
+if prompt := st.chat_input("¿Sobre qué quieres aprender o conversar?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -52,7 +52,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_single(
-                question, "R for Data Science", tokenizer_base, model_base
+                question, "Other", tokenizer_base, model_base
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)
