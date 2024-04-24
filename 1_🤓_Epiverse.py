@@ -19,10 +19,12 @@ st.set_page_config(
     page_icon="🤖",
 )
 
-tokenizer_production, model_production = dependencies.get_model.get_model(
-    constants.BASE_MODEL_ID,
-    constants.MODEL_DATA_SCIENCE_DIR,
-    constants.MODEL_SIVIREP_DIR,
+tokenizer_production, model_production, tokenizer_base, model_base = (
+    dependencies.get_model.get_model(
+        constants.BASE_MODEL_ID,
+        constants.MODEL_DATA_SCIENCE_DIR,
+        constants.MODEL_SIVIREP_DIR,
+    )
 )
 
 st.title("Epiverse Chatbot - Sivirep 👋")

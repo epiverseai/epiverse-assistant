@@ -52,7 +52,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_single(
-                question, "R for Data Science", tokenizer_production, model_production
+                question, "R for Data Science", tokenizer_base, model_base
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)
