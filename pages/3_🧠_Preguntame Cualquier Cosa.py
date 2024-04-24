@@ -28,6 +28,9 @@ tokenizer_production, model_production, tokenizer_base, model_base = (
 )
 
 st.title("Pregúntame lo que quieras - Assistant 👋")
+st.markdown(
+    "\nPuedo respoder cualquier pregunta, sin embargo, si deseas respuestas más precisas de **R** o **Epiverse-Sivirep** te recomiendo usar las versiones específicas.\n"
+)
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
@@ -50,10 +53,12 @@ if prompt := st.chat_input("¿Sobre qué quieres aprender o conversar?"):
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
+            question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_single(
                 question, "Other", tokenizer_base, model_base
             )
             response = dependencies.get_answer.get_answer(response)
+            response = dependencies.translate.translate_en_es(response)
             placeholder = st.empty()
             full_response = ""
             for item in response:
