@@ -20,21 +20,15 @@ st.set_page_config(
 )
 
 # Model to use to predict response
-tokenizer_production, model_production, tokenizer_base, model_base = (
+tokenizer_production, model_production, tokenizer_base, model_base, vector_index = (
     dependencies.get_model.get_model(
         constants.BASE_MODEL_ID,
         constants.MODEL_DATA_SCIENCE_DIR,
         constants.MODEL_SIVIREP_DIR,
+        constants.MODEL_EMBEDED_ID,
+        constants.URLS_SIVIREP,
+        constants.URLS_R_DATASCIENCE,
     )
-)
-
-# Model with RAG
-vector_index = dependencies.get_model.get_rag_model(
-    model_production,
-    tokenizer_production,
-    constants.MODEL_EMBEDED_ID,
-    constants.URLS_SIVIREP,
-    constants.URLS_R_DATASCIENCE,
 )
 
 st.title("Epiverse Chatbot - Sivirep 👋")

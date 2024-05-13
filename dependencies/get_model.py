@@ -13,7 +13,14 @@ import os
 
 # @st.cache(allow_output_mutation=True)
 @st.cache_resource()
-def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR: str):
+def get_model(
+    BASE_MODEL_ID: str,
+    MODEL_DATA_SCIENCE_DIR: str,
+    MODEL_SIVIREP_DIR: str,
+    MODEL_EMBEDED_ID: str,
+    urls_sivirep: str,
+    urls_r_datascience: str,
+):
 
     huggingface_hub.login(token=os.environ.get("HFT"))
 
@@ -56,13 +63,9 @@ def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR
     )
     model_production.eval()
 
-    return tokenizer_production, model_production, tokenizer_base, model_base
-
-
-@st.cache_resource()
-def get_rag_model(
-    model, tokenizer, MODEL_EMBEDED_ID: str, urls_sivirep: str, urls_r_datascience: str
-):
+    ##################
+    # RAG
+    ##################
 
     # join all urls
     urls = urls_sivirep + urls_r_datascience
@@ -88,7 +91,7 @@ def get_rag_model(
         "|",
     ]
     stopping_ids = [
-        tokenizer.encode(stop_token, add_special_tokens=False)[0]
+        tokenizer_production.encode(stop_token, add_special_tokens=False)[0]
         for stop_token in stop_tokens
     ]
 
@@ -98,11 +101,11 @@ def get_rag_model(
         max_new_tokens=256,
         system_prompt=system_prompt,
         query_wrapper_prompt=query_wrapper_prompt,
-        model=model,
-        tokenizer=tokenizer,
+        model=model_production,
+        tokenizer=tokenizer_production,
         generate_kwargs={
-            "eos_token_id": tokenizer.eos_token_id,
-            "pad_token_id": tokenizer.pad_token_id,
+            "eos_token_id": tokenizer_production.eos_token_id,
+            "pad_token_id": tokenizer_production.pad_token_id,
         },
         stopping_ids=stopping_ids,
     )
@@ -115,4 +118,12 @@ def get_rag_model(
     llama_index.core.Settings.llm = llm
     llama_index.core.Settings.embed_model = embed_model
 
-    return llama_index.core.VectorStoreIndex.from_documents(documents)
+    vector_index = llama_index.core.VectorStoreIndex.from_documents(documents)
+
+    return (
+        tokenizer_production,
+        model_production,
+        tokenizer_base,
+        model_base,
+        vector_index,
+    )

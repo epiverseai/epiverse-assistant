@@ -28,6 +28,7 @@ def clean_response(text: str):
     text = text.replace("[/INST]", "")
     text = text.replace("<<<SYS>>>", "")
     text = text.replace("[/", "")
+    text = text.replace("|</ASISTENTE|", "")
     return text
 
 
