@@ -1,9 +1,26 @@
+# Traductor
 deep-translator==1.11.4
+
+# Aplicativo
 streamlit==1.33.0
+
+# Fine-tuning
 bitsandbytes==0.43.1
 accelerate==0.29.2
 peft==0.10.0
 python-dotenv==1.0.1
+
+# RAG
+llama-index==0.10.36
+llama-index-core==0.10.36
+llama-index-embeddings-huggingface==0.2.0
+llama-index-llms-huggingface==0.2.0
+llama-index-embeddings-langchain==0.1.2
+llama-index-readers-web==0.1.13
+langchain==0.1.20
+
+# Otras dependencias a ser instaladas si se corre en disco local 
+
 # transformers==4.38.2 # Quitar comentario si se usa en disco local
 # torch==2.2.1+cu121 # Quitar comentario si se usa en disco local
 # regex==2023.12.25 # Quitar comentario si se usa en disco local

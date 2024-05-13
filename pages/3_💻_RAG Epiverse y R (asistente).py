@@ -15,8 +15,8 @@ global response
 
 
 st.set_page_config(
-    page_title="Epiverse Assistant",
-    page_icon="🤖",
+    page_title="RAG",
+    page_icon="📼",
 )
 
 # Model to use to predict response
@@ -37,7 +37,7 @@ vector_index = dependencies.get_model.get_rag_model(
     constants.URLS_R_DATASCIENCE,
 )
 
-st.title("Epiverse Chatbot - Sivirep 👋")
+st.title("RAG Chatbot - Sivirep y R 👋")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
@@ -61,8 +61,8 @@ if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
-            response = dependencies.evaluate_model.evaluate_model_single(
-                question, "Epiverse", tokenizer_production, model_production
+            response = dependencies.evaluate_model.evaluate_model_rag(
+                question, vector_index
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)

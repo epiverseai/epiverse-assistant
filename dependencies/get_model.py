@@ -3,6 +3,11 @@ import transformers
 import torch
 import peft
 import huggingface_hub
+import llama_index
+import llama_index.core.prompts.prompts
+import llama_index.embeddings.langchain
+import llama_index.llms.huggingface
+import llama_index.readers.web
 import os
 
 
@@ -52,3 +57,62 @@ def get_model(BASE_MODEL_ID: str, MODEL_DATA_SCIENCE_DIR: str, MODEL_SIVIREP_DIR
     model_production.eval()
 
     return tokenizer_production, model_production, tokenizer_base, model_base
+
+
+@st.cache_resource()
+def get_rag_model(
+    model, tokenizer, MODEL_EMBEDED_ID: str, urls_sivirep: str, urls_r_datascience: str
+):
+
+    # join all urls
+    urls = urls_sivirep + urls_r_datascience
+
+    # Web Scrap all documents
+    documents = llama_index.readers.web.BeautifulSoupWebReader().load_data(urls)
+
+    # System prompt for model
+    system_prompt = "You are an expert assistant. Provide accurate, clear R code and explanations for technical queries. Keep responses concise, structured, and relevant, with a focus on precision. Your goal is to answer questions as accurately as possible based on the instructions and context provided. You must type the code in markdown format between ```r and ```. You must finish your answer with [/RES]"
+    query_wrapper_prompt = llama_index.core.PromptTemplate(
+        "<|USER|>{query_str}<|ASSISTANT|>"
+    )
+
+    # Stopping Critiria
+    stop_tokens = [
+        "[/RES]",
+        " [/RES]",
+        "[INST]",
+        " [INST]",
+        "<<<SYS>>>",
+        " <<<SYS>>>",
+        "|>",
+        "|",
+    ]
+    stopping_ids = [
+        tokenizer.encode(stop_token, add_special_tokens=False)[0]
+        for stop_token in stop_tokens
+    ]
+
+    # Configure llama-index LLM
+    llm = llama_index.llms.huggingface.HuggingFaceLLM(
+        context_window=4096,
+        max_new_tokens=256,
+        system_prompt=system_prompt,
+        query_wrapper_prompt=query_wrapper_prompt,
+        model=model,
+        tokenizer=tokenizer,
+        generate_kwargs={
+            "eos_token_id": tokenizer.eos_token_id,
+            "pad_token_id": tokenizer.pad_token_id,
+        },
+        stopping_ids=stopping_ids,
+    )
+
+    # Read and return embeddings from the model to do RAG
+    embed_model = llama_index.embeddings.huggingface.HuggingFaceEmbedding(
+        model_name=MODEL_EMBEDED_ID
+    )
+
+    llama_index.core.Settings.llm = llm
+    llama_index.core.Settings.embed_model = embed_model
+
+    return llama_index.core.VectorStoreIndex.from_documents(documents)

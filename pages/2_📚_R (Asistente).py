@@ -27,6 +27,15 @@ tokenizer_production, model_production, tokenizer_base, model_base = (
     )
 )
 
+# Model with RAG
+vector_index = dependencies.get_model.get_rag_model(
+    model_production,
+    tokenizer_production,
+    constants.MODEL_EMBEDED_ID,
+    constants.URLS_SIVIREP,
+    constants.URLS_R_DATASCIENCE,
+)
+
 st.title("R Chatbot - Assistant 👋")
 
 # Store LLM generated responses
