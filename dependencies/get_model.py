@@ -115,15 +115,12 @@ def get_model(
         model_name=MODEL_EMBEDED_ID
     )
 
-    llama_index.core.Settings.llm = llm
-    llama_index.core.Settings.embed_model = embed_model
-
-    vector_index = llama_index.core.VectorStoreIndex.from_documents(documents)
-
     return (
         tokenizer_production,
         model_production,
         tokenizer_base,
         model_base,
-        vector_index,
+        documents,
+        embed_model,
+        llm,
     )

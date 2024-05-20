@@ -20,15 +20,21 @@ st.set_page_config(
 )
 
 # Model to use to predict response
-tokenizer_production, model_production, tokenizer_base, model_base, vector_index = (
-    dependencies.get_model.get_model(
-        constants.BASE_MODEL_ID,
-        constants.MODEL_DATA_SCIENCE_DIR,
-        constants.MODEL_SIVIREP_DIR,
-        constants.MODEL_EMBEDED_ID,
-        constants.URLS_SIVIREP,
-        constants.URLS_R_DATASCIENCE,
-    )
+(
+    tokenizer_production,
+    model_production,
+    tokenizer_base,
+    model_base,
+    documents,
+    embed_model,
+    llm,
+) = dependencies.get_model.get_model(
+    constants.BASE_MODEL_ID,
+    constants.MODEL_DATA_SCIENCE_DIR,
+    constants.MODEL_SIVIREP_DIR,
+    constants.MODEL_EMBEDED_ID,
+    constants.URLS_SIVIREP,
+    constants.URLS_R_DATASCIENCE,
 )
 
 st.title("RAG Chatbot - Sivirep y R 👋")
@@ -56,7 +62,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_rag(
-                question, vector_index
+                question, embed_model, documents, llm
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)

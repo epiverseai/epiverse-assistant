@@ -2,6 +2,12 @@ import torch
 import inspect
 import transformers
 
+import llama_index
+import llama_index.core.prompts.prompts
+import llama_index.embeddings.langchain
+import llama_index.llms.huggingface
+import llama_index.readers.web
+
 
 class EosListStoppingCriteria(transformers.StoppingCriteria):
     def __init__(self, tokenizer, stop_tokens: list[str]):
@@ -100,7 +106,10 @@ def evaluate_model_beam(
 
 
 @torch.no_grad()
-def evaluate_model_rag(instruction: str, vector_index):
+def evaluate_model_rag(instruction: str, embed_model, documents, llm):
+    llama_index.core.Settings.llm = llm
+    llama_index.core.Settings.embed_model = embed_model
+    vector_index = llama_index.core.VectorStoreIndex.from_documents(documents)
     query_engine = vector_index.as_query_engine(response_mode="compact")
     response = query_engine.query(instruction)
     return response.response
