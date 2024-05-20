@@ -6,7 +6,7 @@ Epiverse Assistant es el chatbot asistente paara el proyecto [Epiverse](https://
 ## **Ejecución Usuario**
 La aplicación debe ser utilizada en debe ser utilizada en un entorno de Google Colab con GPU mínimo de T4.
 
-<a target="_blank" href="https://colab.research.google.com/github/phitterio/phitter-kernel/blob/main/utilities/tutorials/fit_continuous.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a target="_blank" href="https://colab.research.google.com/drive/1RZEBvjciKXezVttruYAWfznQW7aMDVGt?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ### **¿Cómo configuro el aplicativo?**
 
