@@ -2,11 +2,11 @@
 Epiverse Assistant es el chatbot asistente paara el proyecto [Epiverse](https://github.com/epiverse-trace/sivirep/), una librería de R diseñada para ayudar en el análisis y visualización de datos epidemiológicos.
 
 
-
 ## **Ejecución Usuario**
 La aplicación debe ser utilizada en debe ser utilizada en un entorno de Google Colab con GPU mínimo de T4.
 
-<a target="_blank" href="https://colab.research.google.com/drive/1RZEBvjciKXezVttruYAWfznQW7aMDVGt?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+<a target="_blank" href="https://colab.research.google.com/github/epiverseai/epiverse-assistant/blob/main/utilities/app/app_epiverse_github.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 ### **¿Cómo configuro el aplicativo?**
 
