@@ -106,10 +106,10 @@ def evaluate_model_beam(
 
 
 @torch.no_grad()
-def evaluate_model_rag(instruction: str, embed_model, vector_index, llm):
+def evaluate_model_rag(instruction: str, embed_model, documents, llm):
     llama_index.core.Settings.llm = llm
     llama_index.core.Settings.embed_model = embed_model
-    # vector_index = llama_index.core.VectorStoreIndex.from_documents(documents)
+    vector_index = llama_index.core.VectorStoreIndex.from_documents(documents)
     query_engine = vector_index.as_query_engine(response_mode="compact")
     response = query_engine.query(instruction)
     return response.response

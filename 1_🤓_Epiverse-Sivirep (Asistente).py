@@ -25,7 +25,7 @@ st.set_page_config(
     model_production,
     tokenizer_base,
     model_base,
-    vector_index,
+    documents,
     embed_model,
     llm,
 ) = dependencies.get_model.get_model(

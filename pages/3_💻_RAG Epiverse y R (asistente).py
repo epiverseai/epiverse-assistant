@@ -25,7 +25,7 @@ st.set_page_config(
     model_production,
     tokenizer_base,
     model_base,
-    vector_index,
+    documents,
     embed_model,
     llm,
 ) = dependencies.get_model.get_model(
@@ -62,7 +62,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             # question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_rag(
-                question, embed_model, vector_index, llm
+                question, embed_model, documents, llm
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)
