@@ -25,7 +25,7 @@ st.set_page_config(
     model_production,
     tokenizer_base,
     model_base,
-    documents,
+    vector_index,
     embed_model,
     llm,
 ) = dependencies.get_model.get_model(
@@ -60,9 +60,9 @@ if prompt := st.chat_input("¿Qué quieres aprender de Sivirep?"):
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            question = dependencies.translate.translate_es_en(question)
+            # question = dependencies.translate.translate_es_en(question)
             response = dependencies.evaluate_model.evaluate_model_rag(
-                question, embed_model, documents, llm
+                question, embed_model, vector_index, llm
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)
