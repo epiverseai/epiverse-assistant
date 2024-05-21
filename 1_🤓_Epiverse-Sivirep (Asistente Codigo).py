@@ -15,8 +15,8 @@ global response
 
 
 st.set_page_config(
-    page_title="RAG",
-    page_icon="📼",
+    page_title="Epiverse Code Assistant",
+    page_icon="🤖",
 )
 
 # Model to use to predict response
@@ -37,7 +37,7 @@ st.set_page_config(
     constants.URLS_R_DATASCIENCE,
 )
 
-st.title("RAG Chatbot - Sivirep y R 👋")
+st.title("Epiverse/Sivirep Chatbot - Asistente de Código 👋")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
@@ -60,9 +60,9 @@ if prompt := st.chat_input("¿Qué quieres aprender de Sivirep?"):
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            # question = dependencies.translate.translate_es_en(question)
-            response = dependencies.evaluate_model.evaluate_model_rag(
-                question, embed_model, documents, llm
+            question = dependencies.translate.translate_es_en(question)
+            response = dependencies.evaluate_model.evaluate_model_single(
+                question, "Epiverse", tokenizer_production, model_production
             )
             response = dependencies.get_answer.get_answer(response)
             response = dependencies.translate.translate_en_es(response)

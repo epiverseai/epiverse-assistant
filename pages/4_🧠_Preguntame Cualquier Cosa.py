@@ -37,7 +37,7 @@ st.set_page_config(
     constants.URLS_R_DATASCIENCE,
 )
 
-st.title("Pregúntame lo que quieras - Assistant 👋")
+st.title("Pregúntame lo que quieras - Asistente 👋")
 st.markdown(
     "\nPuedo respoder cualquier pregunta, sin embargo, si deseas respuestas más precisas de **R** o **Epiverse-Sivirep** te recomiendo usar las versiones específicas.\n"
 )

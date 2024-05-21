@@ -15,7 +15,7 @@ global response
 
 
 st.set_page_config(
-    page_title="R Assistant",
+    page_title="R Code Assistant",
     page_icon="🤗",
 )
 
@@ -37,7 +37,7 @@ st.set_page_config(
     constants.URLS_R_DATASCIENCE,
 )
 
-st.title("R Chatbot - Assistant 👋")
+st.title("R Chatbot - Asistente de Código 👋")
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
