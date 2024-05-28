@@ -48,21 +48,21 @@ A continuación se presenta un paso a paso de cómo configurar el aplicativo.
 
 ### **¿Cómo uso el aplicativo?**
 
-- Puedes seleccionar sobre qué tema hacer las preguntas, seleccionando una opción en la barra izquierda.
+1. Puedes seleccionar sobre qué tema hacer las preguntas, seleccionando una opción en la barra izquierda.
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image100.png?raw=true" width="500" />
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image101.png?raw=true" width="500" />
 
-- Realiza la pregunta cuya respuesta quieres aprender o verificar en la barra inferior y luego presiona enter para enviarla al assistente
+2. Realiza la pregunta cuya respuesta quieres aprender o verificar en la barra inferior y luego presiona enter para enviarla al assistente
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image110.png?raw=true" width="500" />
 
-- Espera que el assistente procese tu pregunta y genere la respuesta
+3. Espera que el assistente procese tu pregunta y genere la respuesta
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image120.png?raw=true" width="500" />
 
-- Y listo ✅ puedes usar preguntar cuantas veces quieras
+4. Y listo ✅ puedes preguntar cuantas veces quieras
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image130.png?raw=true" width="500" />
 
