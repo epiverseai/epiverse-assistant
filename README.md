@@ -50,21 +50,21 @@ A continuación se presenta un paso a paso de cómo configurar el aplicativo.
 
 - Puedes seleccionar sobre qué tema hacer las preguntas, seleccionando una opción en la barra izquierda.
 
-  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image10.png?raw=true" width="500" />
+  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image100.png?raw=true" width="500" />
 
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image101.png?raw=true" width="500" />
 
 - Realiza la pregunta cuya respuesta quieres aprender o verificar en la barra inferior y luego presiona enter para enviarla al assistente
 
-  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image11.png?raw=true" width="500" />
+  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image110.png?raw=true" width="500" />
 
 - Espera que el assistente procese tu pregunta y genere la respuesta
 
-  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image12.png?raw=true" width="500" />
+  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image120.png?raw=true" width="500" />
 
 - Y listo ✅ puedes usar preguntar cuantas veces quieras
 
-  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image13.png?raw=true" width="500" />
+  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image130.png?raw=true" width="500" />
 
 ## Instalación
 
