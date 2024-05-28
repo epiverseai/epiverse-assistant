@@ -29,6 +29,7 @@ A continuación se presenta un paso a paso de cómo configurar el aplicativo.
    <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image06.png?raw=true" width="500" />
 
 6. Presione `Click to Submit`
+
    <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image07.png?raw=true" width="500" />
 
 7. Espere hasta que la aplicación termine de cargar
@@ -41,6 +42,7 @@ A continuación se presenta un paso a paso de cómo configurar el aplicativo.
 
 - Puedes seleccionar sobre qué tema hacer las preguntas, seleccionando una opción en la barra izquierda.
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image10.png?raw=true" width="500" />
+  <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image101.png?raw=true" width="500" />
 
 - Realiza la pregunta cuya respuesta quieres aprender o verificar en la barra inferior y luego presiona enter para enviarla al assistente
   <img src="https://github.com/epiverseai/epiverse-assistant/blob/main/multimedia/image11.png?raw=true" width="500" />
@@ -57,11 +59,7 @@ Y listo ✅ puedes usar preguntar cuantas veces quieras
    ```bash
    git clone https://github.com/epiverseai/epiverse-assistant.git
    ```
-2. Navega al directorio del proyecto:
-   ```bash
-   cd epiverse-assistant
-   ```
-3. Instala las dependencias requeridas:
+2. Instala las dependencias requeridas:
    ```bash
    pip install -r requirements.txt
    ```
@@ -71,7 +69,7 @@ Y listo ✅ puedes usar preguntar cuantas veces quieras
 Ejecuta el script principal para comenzar a usar Epiverse Assistant:
 
 ```bash
-python 1__Epiverse-Sivirep (Asistente).py
+python -m streamlit run "1_🤓_Epiverse-Sivirep (Asistente Codigo).py"
 ```
 
 ## Dependencias
